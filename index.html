@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codestub — QR Code Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/generator.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-theme="light">
+
+<div class="app-shell"> 
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark">▣</span>
+      <span class="brand-name">Codestub</span>
+    </div>
+    <nav class="nav" id="mainNav">
+      <button class="nav-item is-active" data-view="dashboard">
+        <span class="nav-index">01</span> Dashboard
+      </button>
+      <button class="nav-item" data-view="generator">
+        <span class="nav-index">02</span> Generator
+      </button>
+      <button class="nav-item" data-view="history">
+        <span class="nav-index">03</span> History
+      </button>
+      <button class="nav-item" data-view="settings">
+        <span class="nav-index">04</span> Settings
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span id="themeToggleLabel">Dark mode</span>
+      </button>
+    </div>
+  </aside> 
+
+  <!-- Mobile top bar -->
+  <header class="mobile-bar">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+    <span class="brand-name">Codestub</span>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <section class="view is-active" id="view-dashboard">
+      <header class="view-head">
+        <h1>Dashboard</h1>
+        <p class="view-sub">Everything you've printed, at a glance.</p>
+      </header>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-label">Total generated</span>
+          <span class="stat-value" id="statTotal">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Favorites</span>
+          <span class="stat-value" id="statFavorites">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Downloads</span>
+          <span class="stat-value" id="statDownloads">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Most used type</span>
+          <span class="stat-value stat-value--sm" id="statTopType">—</span>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Recently generated</h2>
+            <button class="link-btn" data-view-link="history">View all</button>
+          </div>
+          <div class="stub-list" id="recentList">
+            <p class="empty-note">Nothing printed yet. Head to the Generator to create your first code.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Favorites</h2>
+            <button class="link-btn" data-view-link="history">View all</button>
+          </div>
+          <div class="stub-list" id="favoritesList">
+            <p class="empty-note">Star a code to pin it here.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Download history</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="downloadTable">
+            <thead>
+              <tr><th>Content</th><th>Type</th><th>Format</th><th>When</th></tr>
+            </thead>
+            <tbody id="downloadTableBody">
+              <tr><td colspan="4" class="empty-note">No downloads recorded yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERATOR -->
+    <section class="view" id="view-generator">
+      <header class="view-head">
+        <h1>Generator</h1>
+        <p class="view-sub">Fill in the details, watch the stub print itself.</p>
+      </header>
+
+      <div class="generator-grid">
+
+        <!-- Form column -->
+        <div class="gen-form-col">
+
+          <div class="panel">
+            <div class="type-tabs" id="typeTabs">
+              <button class="type-tab is-active" data-type="url">URL</button>
+              <button class="type-tab" data-type="text">Text</button>
+              <button class="type-tab" data-type="email">Email</button>
+              <button class="type-tab" data-type="phone">Phone</button>
+              <button class="type-tab" data-type="sms">SMS</button>
+              <button class="type-tab" data-type="wifi">Wi-Fi</button>
+              <button class="type-tab" data-type="vcard">Contact</button>
+              <button class="type-tab" data-type="social">Social</button>
+            </div>
+
+            <form id="qrForm" class="qr-form" autocomplete="off">
+              <!-- dynamic fields injected here -->
+              <div id="dynamicFields"></div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title">Customize</h2>
+            <div class="custom-grid">
+              <label class="field">
+                <span class="field-label">Size <span id="sizeValue">280</span>px</span>
+                <input type="range" id="optSize" min="120" max="480" step="10" value="280">
+              </label>
+              <label class="field">
+                <span class="field-label">Margin <span id="marginValue">2</span></span>
+                <input type="range" id="optMargin" min="0" max="10" step="1" value="2">
+              </label>
+              <label class="field">
+                <span class="field-label">Foreground</span>
+                <input type="color" id="optFg" value="#1b211d">
+              </label>
+              <label class="field">
+                <span class="field-label">Background</span>
+                <input type="color" id="optBg" value="#ffffff">
+              </label>
+              <label class="field">
+                <span class="field-label">Error correction</span>
+                <select id="optEcl">
+                  <option value="L">L — low (7%)</option>
+                  <option value="M" selected>M — medium (15%)</option>
+                  <option value="Q">Q — quartile (25%)</option>
+                  <option value="H">H — high (30%)</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Dot style</span>
+                <select id="optDots">
+                  <option value="square">Square</option>
+                  <option value="rounded" selected>Rounded</option>
+                  <option value="dots">Dots</option>
+                  <option value="classy">Classy</option>
+                  <option value="extra-rounded">Extra rounded</option>
+                </select>
+              </label>
+              <label class="field field--file">
+                <span class="field-label">Logo (optional)</span>
+                <input type="file" id="optLogo" accept="image/*">
+              </label>
+            </div>
+            <button type="button" class="ghost-btn" id="clearLogo">Remove logo</button>
+          </div>
+
+        </div>
+
+        <!-- Preview column -->
+        <div class="gen-preview-col">
+          <div class="ticket-stub" id="ticketStub">
+            <div class="stub-top">
+              <span class="stub-eyebrow">Codestub / live preview</span>
+              <button class="zoom-btn" id="zoomBtn" aria-label="Zoom preview">⤢</button>
+            </div>
+            <div class="stub-perf"></div>
+            <div class="stub-qr-wrap">
+              <div id="qrCanvas" class="qr-canvas"></div>
+            </div>
+            <div class="stub-perf stub-perf--tear"></div>
+            <div class="stub-meta">
+              <div class="stub-meta-row">
+                <span>Type</span><span id="metaType">URL</span>
+              </div>
+              <div class="stub-meta-row">
+                <span>Content</span><span id="metaContent" class="truncate">—</span>
+              </div>
+              <div class="stub-meta-row">
+                <span>Stamped</span><span id="metaDate">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stub-actions">
+            <button class="primary-btn" id="btnDownloadPng">Download PNG</button>
+            <button class="secondary-btn" id="btnDownloadSvg">Download SVG</button>
+            <button class="secondary-btn" id="btnPrint">Print</button>
+            <button class="secondary-btn" id="btnCopy">Copy image</button>
+            <button class="icon-toggle-btn" id="btnFavorite" aria-pressed="false" title="Add to favorites">☆</button>
+          </div>
+          <p class="hint-text" id="genHint"></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="view" id="view-history">
+      <header class="view-head">
+        <h1>History</h1>
+        <p class="view-sub">Every stub you've ever printed, searchable.</p>
+      </header>
+
+      <div class="panel">
+        <div class="history-controls">
+          <input type="search" id="historySearch" class="search-input" placeholder="Search by content…">
+          <select id="historyTypeFilter" class="select-input">
+            <option value="all">All types</option>
+            <option value="url">URL</option>
+            <option value="text">Text</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="sms">SMS</option>
+            <option value="wifi">Wi-Fi</option>
+            <option value="vcard">Contact</option>
+            <option value="social">Social</option>
+          </select>
+          <label class="checkbox-field">
+            <input type="checkbox" id="historyFavOnly"> Favorites only
+          </label>
+          <select id="historySort" class="select-input">
+            <option value="recent">Recently generated</option>
+            <option value="alpha">Alphabetical</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="historyTable">
+            <thead>
+              <tr>
+                <th></th><th>Content</th><th>Type</th><th>Created</th><th>Downloads</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr><td colspan="6" class="empty-note">No history yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="view-settings">
+      <header class="view-head">
+        <h1>Settings</h1>
+        <p class="view-sub">Appearance and data controls.</p>
+      </header>
+
+      <div class="panel settings-panel">
+        <h2 class="panel-title">Appearance</h2>
+        <div class="settings-row">
+          <div>
+            <p class="settings-row-title">Dark mode</p>
+            <p class="settings-row-sub">Switch the interface between light paper and dark ink.</p>
+          </div>
+          <button class="switch" id="settingsThemeSwitch" role="switch" aria-checked="false"><span class="switch-knob"></span></button>
+        </div>
+      </div>
+
+      <div class="panel settings-panel">
+        <h2 class="panel-title">Data</h2>
+        <div class="settings-row">
+          <div>
+            <p class="settings-row-title">Export history</p>
+            <p class="settings-row-sub">Save all generated codes and settings as a JSON file.</p>
+          </div>
+          <button class="secondary-btn" id="btnExport">Export JSON</button>
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="settings-row-title">Import history</p>
+            <p class="settings-row-sub">Load a previously exported JSON file. Merges with existing history.</p>
+          </div>
+          <label class="secondary-btn file-btn">
+            Import JSON
+            <input type="file" id="importFile" accept="application/json" hidden>
+          </label>
+        </div>
+        <div class="settings-row">
+          <div>
+            <p class="settings-row-title">Clear history</p>
+            <p class="settings-row-sub">Permanently remove every saved QR code. This cannot be undone.</p>
+          </div>
+          <button class="danger-btn" id="btnClearHistory">Clear all</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Zoom modal -->
+<div class="modal-overlay" id="zoomOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="zoomClose" aria-label="Close">✕</button>
+    <div id="qrZoomCanvas" class="qr-zoom-canvas"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.0"></script>
+<script src="js/utils.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/history.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

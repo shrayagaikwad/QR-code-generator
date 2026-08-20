@@ -1,0 +1,171 @@
+/* DESIGN OF QR CODE GENEREATOR */
+
+/* ---------- Generator layout ---------- */
+.generator-grid{
+  display:grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap:22px;
+  align-items:start;
+}
+
+/* ---------- Type tabs ---------- */
+.type-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:18px;
+  padding-bottom:16px;
+  border-bottom:1px dashed var(--line);
+}
+.type-tab{
+  font-family: var(--font-display);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  padding: 8px 12px;
+  border:1px solid var(--line);
+  border-radius: 99px;
+  color: var(--ink-soft);
+}
+.type-tab:hover{ border-color: var(--ink); color: var(--ink); }
+.type-tab.is-active{
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.qr-form{ display:flex; flex-direction:column; gap:14px; }
+.form-row{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+.form-row .field{ grid-column: span 1; }
+.field--wide{ grid-column: 1 / -1; }
+
+/* ---------- Customize grid ---------- */
+.custom-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:16px 20px;
+}
+.field--file{ grid-column: 1 / -1; }
+input[type="range"]{ accent-color: var(--scan-red); width:100%; }
+input[type="color"]{
+  width:100%; height:38px;
+  border:1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding:2px;
+  background: var(--paper);
+}
+
+/* ---------- Preview column ---------- */
+.gen-preview-col{
+  position: sticky;
+  top: 40px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+/* Signature element: perforated ticket stub */
+.ticket-stub{
+  width:100%;
+  max-width: 360px;
+  background: var(--panel);
+  border:1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow:hidden;
+}
+.stub-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 18px 10px;
+}
+.stub-eyebrow{
+  font-family: var(--font-display);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color: var(--ink-soft);
+}
+.zoom-btn{
+  font-size:14px;
+  color: var(--ink-soft);
+  border:1px solid var(--line);
+  border-radius:4px;
+  width:28px; height:28px;
+}
+.zoom-btn:hover{ color: var(--ink); border-color: var(--ink); }
+
+.stub-perf{
+  height:0;
+  border-top: 2px dashed var(--line);
+  position:relative;
+  margin: 0 -1px;
+}
+.stub-perf::before, .stub-perf::after{
+  content:"";
+  position:absolute;
+  top:-9px;
+  width:18px; height:18px;
+  border-radius:50%;
+  background: var(--paper);
+  border:1px solid var(--line-soft);
+}
+.stub-perf::before{ left:-10px; }
+.stub-perf::after{ right:-10px; }
+
+.stub-qr-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 26px 20px;
+  min-height: 180px;
+}
+.qr-canvas{ display:flex; align-items:center; justify-content:center; }
+.qr-canvas canvas, .qr-canvas img, .qr-canvas svg{ max-width:100%; height:auto; }
+
+.stub-meta{
+  padding: 14px 20px 20px;
+  font-family: var(--font-display);
+  font-size:11px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.stub-meta-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color: var(--ink-soft);
+}
+.stub-meta-row span:last-child{
+  color: var(--ink);
+  max-width:200px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  text-align:right;
+}
+
+.stub-actions{
+  width:100%;
+  max-width:360px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.stub-actions .primary-btn{ flex:1 1 100%; }
+.stub-actions .secondary-btn{ flex:1; }
+
+.hint-text{
+  font-size:12px;
+  color: var(--ink-soft);
+  max-width:360px;
+  text-align:center;
+}
+
+.qr-zoom-canvas canvas, .qr-zoom-canvas img, .qr-zoom-canvas svg{
+  max-width: min(80vw, 480px);
+  height:auto;
+}
