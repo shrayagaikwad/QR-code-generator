@@ -17,7 +17,7 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
 
 :root{
-  --paper: #fda07b;
+  --paper: #fdba7b;
   --panel: #ff92d2;
   --ink: #1B211D;
   --ink-soft: #161616;
