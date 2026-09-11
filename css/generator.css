@@ -18,16 +18,17 @@
   border-bottom:1px dashed var(--line);
 }
 .type-tab{
-  font-family: var(--font-display);
+  font-family: "Manrope", sans-serif;
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:0.04em;
   padding: 8px 12px;
-  border:1px solid var(--line);
+  
   border-radius: 99px;
   color: var(--ink-soft);
+  background-color: rgba(255, 255, 255, 0.11);
 }
-.type-tab:hover{ border-color: var(--ink); color: var(--ink); }
+.type-tab:hover{ background-color: rgba(0, 0, 0, 0.13); color: var(--ink); }
 .type-tab.is-active{
   background: var(--ink);
   border-color: var(--ink);
@@ -45,14 +46,14 @@
   grid-template-columns: repeat(2, 1fr);
   gap:16px 20px;
 }
-.field--file{ grid-column: 1 / -1; }
+.field--file{ grid-column: 1 / -1;  }
 input[type="range"]{ accent-color: var(--scan-red); width:100%; }
 input[type="color"]{
   width:100%; height:38px;
-  border:1px solid var(--line);
+  border:0px solid var(--line);
   border-radius: var(--radius-sm);
-  padding:2px;
-  background: var(--paper);
+  padding:0px;
+  
 }
 
 /* ---------- Preview column ---------- */
@@ -99,9 +100,9 @@ input[type="color"]{
 
 .stub-perf{
   height:0;
-  border-top: 2px dashed var(--line);
+  border-top: 2px var(--line);
   position:relative;
-  margin: 0 -1px;
+  margin: 1 -1px;
 }
 .stub-perf::before, .stub-perf::after{
   content:"";

@@ -110,7 +110,7 @@ const History = (() => {
         <td>${i.downloadCount || 0}</td>
         <td style="white-space:nowrap;">
           <button class="link-btn load-item" style="margin-right:10px;">Load</button>
-          <button class="link-btn delete-item" style="color:var(--scan-red);">Delete</button>
+          <button class="link-btn delete-item" style="color:white;">Delete</button>
         </td>
       </tr>
     `).join('');

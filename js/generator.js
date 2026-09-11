@@ -28,11 +28,11 @@ const Generator = (() => {
       { key:'hidden', label:'Hidden network', type:'checkbox', wide:true }
     ],
     vcard: [
-      { key:'name', label:'Full name', type:'text', placeholder:'Shraya Gaikwad', required:true },
-      { key:'org', label:'Organization', type:'text', placeholder:'Google' },
-      { key:'title', label:'Job title', type:'text', placeholder:'Web Developer' },
+      { key:'name', label:'Full name', type:'text', placeholder:'Name', required:true },
+      { key:'org', label:'Organization', type:'text', placeholder:'Organization' },
+      { key:'title', label:'Job title', type:'text', placeholder:'Job Title' },
       { key:'phone', label:'Phone', type:'tel', placeholder:'+91 1234567890' },
-      { key:'email', label:'Email', type:'email', placeholder:'shraya@example.com' },
+      { key:'email', label:'Email', type:'email', placeholder:'@gmail.com' },
       { key:'website', label:'Website', type:'url', placeholder:'example.com' },
       { key:'address', label:'Address', type:'text', placeholder:'Street, City, District', wide:true }
     ],
